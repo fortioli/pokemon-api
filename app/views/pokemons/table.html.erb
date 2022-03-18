@@ -1,0 +1,44 @@
+<h1>Pokemons#table</h1>
+<p>Show an awesome table here</p>
+
+<% @pagenumber = params[:page] %>
+
+<p>Page <%= @pagenumber %> </p>
+
+<% @pokemons = Pokemon.page(@pagenumber) %>
+
+<table>
+    <tr>
+        <th>Number</th>
+        <th>Name</th>
+        <th>Type 1</th>
+        <th>Type 2</th>
+        <th>Total</th>
+        <th>HP</th>
+        <th>Attack</th>
+        <th>Defense</th>
+        <th>Sp. Atk</th>
+        <th>Sp. Def</th>
+        <th>Speed</th>
+        <th>Generation</th>
+        <th>Legendary</th>
+    </tr>
+    <% @pokemons.each do |pokemon| %>
+    <tr>
+        <td><%= pokemon.number %></td>
+        <td><%= pokemon.name %></td>
+        <td><%= pokemon.type_1 %></td>
+        <td><%= pokemon.type_2 %></td>
+        <td><%= pokemon.total %></td>
+        <td><%= pokemon.hp %></td>
+        <td><%= pokemon.attack %></td>
+        <td><%= pokemon.defense %></td>
+        <td><%= pokemon.sp_atk %></td>
+        <td><%= pokemon.sp_def %></td>
+        <td><%= pokemon.speed %></td>
+        <td><%= pokemon.generation %></td>
+        <td><%= pokemon.legendary %></td>
+    </tr>
+    <% end %>
+
+</table>
