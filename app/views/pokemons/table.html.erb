@@ -1,5 +1,7 @@
-<h1>Pokemons#table</h1>
-<p>Show an awesome table here</p>
+<%= stylesheet_link_tag 'style.css' %>
+
+<h1>Pokemons with Rails</h1>
+<p>Table generated with Ruby on Rails</p>
 
 <% @pagenumber = params[:page] %>
 
@@ -9,7 +11,7 @@
 
 <table>
     <tr>
-        <th>Number</th>
+        <th>#</th>
         <th>Name</th>
         <th>Type 1</th>
         <th>Type 2</th>
@@ -25,10 +27,10 @@
     </tr>
     <% @pokemons.each do |pokemon| %>
     <tr>
-        <td><%= pokemon.number %></td>
-        <td><%= pokemon.name %></td>
-        <td><%= pokemon.type_1 %></td>
-        <td><%= pokemon.type_2 %></td>
+        <td class="first"><%= pokemon.number %></td>
+        <td class="name"><%= pokemon.name %></td>
+        <%= content_tag(:td, pokemon.type_1, class: pokemon.type_1) %>
+        <%= content_tag(:td, pokemon.type_2, class: pokemon.type_2) %>
         <td><%= pokemon.total %></td>
         <td><%= pokemon.hp %></td>
         <td><%= pokemon.attack %></td>
@@ -37,8 +39,24 @@
         <td><%= pokemon.sp_def %></td>
         <td><%= pokemon.speed %></td>
         <td><%= pokemon.generation %></td>
-        <td><%= pokemon.legendary %></td>
+        <%= content_tag(:td, pokemon.legendary, class: (pokemon.legendary ? 'legendary' : '')) %>
     </tr>
     <% end %>
+
+    <tr>
+        <td colspan='2' class="foot previous" >
+        <% unless @pokemons.first_page? %>
+            <div><%= link_to 'Previous page', { :action => 'table', :page => @pagenumber.to_i-1 }%></div>
+        <% end %>
+        </td>
+        <td colspan='9' class="foot center">
+            <div class="page-number">Page <%= @pagenumber %></div>
+        </td>
+        <td colspan='2' class="foot next">
+        <% unless @pokemons.last_page? %>
+            <div><%= link_to 'Next page', { :action => 'table', :page => @pagenumber.to_i+1 }%></div>
+        <% end %>
+        </td>
+    </tr>
 
 </table>
