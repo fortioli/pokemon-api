@@ -59,26 +59,26 @@ class PokemonsController < ApplicationController
   def load_csv
     # Original csv was found there: https://gist.github.com/armgilles/194bcff35001e7eb53a2a8b441e8b2c6
     # Method preserved for history purposes but should not because it isn't restful
-      # pokemons = CSV.foreach('resources/pokemon.csv', headers: true).map do |row|                                                                 
-      # { 
-      #   number: row['Number'].to_i,
-      #   name: row['Name'],
-      #   type_1: row['Type_1'],
-      #   type_2: row['Type_2'],
-      #   total: row['Total'].to_i,
-      #   hp: row['HP'].to_i,
-      #   attack: row['Attack'].to_i,
-      #   defense: row['Defense'].to_i,
-      #   sp_atk: row['Sp_Atk'].to_i,
-      #   sp_def: row['Sp_Def'].to_i,
-      #   speed: row['Speed'].to_i,
-      #   generation: row['Generation'].to_i,
-      #   legendary: (row['Legendary'].eql? 'True')
-      # }
-      # end
-      # Pokemon.insert_all(pokemons)
-      # render json: pokemons
-      render json: { error: 'This method should not be called anymore' }, status: :bad_request
+    pokemons = CSV.foreach('resources/pokemon.csv', headers: true).map do |row|                                                                 
+    { 
+      number: row['Number'].to_i,
+      name: row['Name'],
+      type_1: row['Type_1'],
+      type_2: row['Type_2'],
+      total: row['Total'].to_i,
+      hp: row['HP'].to_i,
+      attack: row['Attack'].to_i,
+      defense: row['Defense'].to_i,
+      sp_atk: row['Sp_Atk'].to_i,
+      sp_def: row['Sp_Def'].to_i,
+      speed: row['Speed'].to_i,
+      generation: row['Generation'].to_i,
+      legendary: (row['Legendary'].eql? 'True')
+    }
+    end
+    Pokemon.insert_all(pokemons)
+    render json: pokemons
+    #render json: { error: 'This method should not be called anymore' }, status: :bad_request
   end
 
   def table
