@@ -10,8 +10,10 @@ On a system with a working Rails installation:
 
 * Get the code from git.
 * In the project folder, run `bundle install` to get the dependencies.
+* Run `rails db:migrate RAILS_ENV=development` to setup the schema
 * Run `rails s` to start the server.
 * On a browser, go to `http://localhost:3000/pokemons/visual/table/1` to see the table.
+* If empty, call this endpoint to load the initial data: `POST localhost:3000/pokemons/action/load` (don't call it a second time unless you want to do a bunch of DELETEs)
 
 In a tool like Postman or Insomnia, you can access the following endpoints:
 * `GET localhost:3000/pokemons` Lists all the pokemon.
